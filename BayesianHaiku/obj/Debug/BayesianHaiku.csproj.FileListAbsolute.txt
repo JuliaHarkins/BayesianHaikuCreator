@@ -1,0 +1,7 @@
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.csprojAssemblyReference.cache
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CoreCompileInputs.cache
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\bin\Debug\BayesianHaiku.exe.config
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\bin\Debug\BayesianHaiku.exe
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\bin\Debug\BayesianHaiku.pdb
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.exe
+C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.pdb
