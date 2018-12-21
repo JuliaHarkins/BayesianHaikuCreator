@@ -8,8 +8,11 @@ namespace BayesianHaiku
 {
     class BayesianNetwork
     {
+        private string _fileLocation;
         private List<Word> _words;
+
         public List<Word> Words { get { return _words; } set { _words = value; } }
+        public string FileName { get { return _fileLocation; } set { _fileLocation = value; } }
 
         /// <summary>
         /// 
@@ -28,13 +31,7 @@ namespace BayesianHaiku
                         exists = true;
                         w.AppearanceCount++;
 
-                        if (i != 0)
-                        {
-                            if (!w.PriorWords.ContainsKey(corpus[i - 1]))
-                                w.PriorWords.Add(corpus[i - 1], 1);
-                            else
-                                w.PriorWords[corpus[i - 1]]++;
-                        }
+                        
                         if (i != corpus.Count() - 1)
                         {
                             if (!w.SubsequentWords.ContainsKey(corpus[i + 1]))
@@ -46,14 +43,12 @@ namespace BayesianHaiku
                 }
                 if (!exists)
                 {
-                    Word newWord = new Word();
-                    newWord.Name = corpus[i];
-                    newWord.AppearanceCount = 1;
-                    newWord.Sylables = 0;
-
-                    if (i != 0)
-                        newWord.PriorWords.Add(corpus[i - 1], 1);
-
+                    Word newWord = new Word
+                    {
+                        Name = corpus[i],
+                        AppearanceCount = 1,
+                        Sylables = 0
+                    };
                     if (i != corpus.Count() - 1)
                         newWord.SubsequentWords.Add(corpus[i + 1], 1);
 

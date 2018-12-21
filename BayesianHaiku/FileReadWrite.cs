@@ -9,26 +9,47 @@ namespace BayesianHaiku
 {
     class FileReadWrite
     {
-        private string _TrainingFilePath = "TrainingFiles";
-        private string _TrainedFilePath = "TrainedBayesianNetworks";
+        private readonly string _trainingFilePath = "TrainingFiles";
+        private readonly string _trainedFilePath = "TrainedBayesianNetworks";
 
         public FileReadWrite()
         {
-            if (!Directory.Exists(_TrainingFilePath))
+            if (!Directory.Exists(_trainingFilePath))
             {
-                Directory.CreateDirectory(_TrainingFilePath);
+                Directory.CreateDirectory(_trainingFilePath);
             }
-            if (!Directory.Exists(_TrainedFilePath))
+            if (!Directory.Exists(_trainedFilePath))
             {
-                Directory.CreateDirectory(_TrainedFilePath);
+                Directory.CreateDirectory(_trainedFilePath);
             }
 
         }
         public void SaveNetworkKnowledge(BayesianNetwork bn)
         {
+            int num = 1;
+            int fileLenght = _trainedFilePath.Count();
+            while (File.Exists(_trainedFilePath + "/" + bn.FileName + ".txt"))
+            {
+                if (num == 1)
+                    bn.FileName = bn.FileName + num;
+                else
+                {
+                    List<Char> fileNameChange = bn.FileName.ToCharArray().ToList();
 
+                    for(int i = -1;  i <num.ToString().Count();i++)
+                        fileNameChange[fileLenght + i] = (num++).ToString().ToCharArray()[i];
+                    bn.FileName = fileNameChange.ToString();
+                }
+            }
+            File.Create(_trainedFilePath + "/" + bn.FileName + ".txt");
+            foreach(Word w in bn.Words)
+            {
+
+            }
         }
+            
 
+        // remove the .txt
         public BayesianNetwork LoadNetworkKnowledge()
         {
             BayesianNetwork bn = new BayesianNetwork();
@@ -44,7 +65,7 @@ namespace BayesianHaiku
         public string[]  LoadTrainingData()
         {
             List<string> words = new List<string>();
-            foreach (string file in Directory.EnumerateFiles(_TrainingFilePath, "*.txt"))
+            foreach (string file in Directory.EnumerateFiles(_trainingFilePath, "*.txt"))
             {
                 //gets rid of the punctuation
                 string withoutPunctuation = RemovePuntuation(file);

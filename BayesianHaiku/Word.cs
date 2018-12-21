@@ -11,7 +11,6 @@ namespace BayesianHaiku
         private string _name;
         private int _sylables;
         private int _apperanceCount;
-        private Dictionary<string, int> _priorWords;
         private Dictionary<string, int> _subsequentWords;
     
         /// <summary>
@@ -28,10 +27,6 @@ namespace BayesianHaiku
         public int AppearanceCount { get { return _apperanceCount; } set { _apperanceCount = value; } }
         /// <summary>
         /// A list of words that normally appear befor this word
-        /// </summary>
-        public Dictionary<string, int> PriorWords { get { return _priorWords; } set { _priorWords = value; } }
-        /// <summary>
-        /// A list of words that normally appear after this word
         /// </summary>
         public Dictionary<string, int> SubsequentWords { get { return _subsequentWords; } set { _subsequentWords = value; } }
 
