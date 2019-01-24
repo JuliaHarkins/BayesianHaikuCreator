@@ -5,3 +5,10 @@ C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\bin\Debug\BayesianHaiku.
 C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\bin\Debug\BayesianHaiku.pdb
 C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.exe
 C:\Users\harki\source\repos\BayesianHaiku\BayesianHaiku\obj\Debug\BayesianHaiku.pdb
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csprojAssemblyReference.cache
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CoreCompileInputs.cache
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.exe
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.pdb
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\BayesianHaiku.exe.config
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\BayesianHaiku.exe
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\BayesianHaiku.pdb

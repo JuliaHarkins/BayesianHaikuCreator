@@ -9,9 +9,8 @@ namespace BayesianHaiku
     class Word
     {
         private string _name;
-        private int _sylables;
+        private int _syllables;
         private int _apperanceCount;
-        private Dictionary<string, int> _priorWords;
         private Dictionary<string, int> _subsequentWords;
     
         /// <summary>
@@ -21,15 +20,11 @@ namespace BayesianHaiku
         /// <summary>
         /// The amount of sylables within the word
         /// </summary>
-        public int Sylables { get { return _sylables; } set { _sylables = value; } }
+        public int Sylables { get { return _syllables; } set { _syllables = value; } }
         /// <summary>
         /// the amount of times this word appeared in the training data
         /// </summary>
         public int AppearanceCount { get { return _apperanceCount; } set { _apperanceCount = value; } }
-        /// <summary>
-        /// A list of words that normally appear befor this word
-        /// </summary>
-        public Dictionary<string, int> PriorWords { get { return _priorWords; } set { _priorWords = value; } }
         /// <summary>
         /// A list of words that normally appear after this word
         /// </summary>

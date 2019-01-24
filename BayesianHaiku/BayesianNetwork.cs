@@ -8,33 +8,33 @@ namespace BayesianHaiku
 {
     class BayesianNetwork
     {
+        private int _totalWords;
         private List<Word> _words;
         public List<Word> Words { get { return _words; } set { _words = value; } }
 
+        public BayesianNetwork()
+        {
+            _totalWords = 0;
+            _words = new List<Word>();
+        }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="corpus">The words in the training data</param>
         public void Train(string[] corpus)
         {
-            bool exists;
+            bool alreadyExistingWord;
 
-            for(int i =0; i< corpus.Count(); i++) { 
-                exists = false;
+            for(int i =0; i< corpus.Count(); i++) {
+                _totalWords++;
+                alreadyExistingWord = false;
+                if (_words != null)
                 foreach(Word w in _words)
                 {
                     if(w.Name == corpus[i])
                     {
-                        exists = true;
+                        alreadyExistingWord = true;
                         w.AppearanceCount++;
-
-                        if (i != 0)
-                        {
-                            if (!w.PriorWords.ContainsKey(corpus[i - 1]))
-                                w.PriorWords.Add(corpus[i - 1], 1);
-                            else
-                                w.PriorWords[corpus[i - 1]]++;
-                        }
                         if (i != corpus.Count() - 1)
                         {
                             if (!w.SubsequentWords.ContainsKey(corpus[i + 1]))
@@ -44,20 +44,29 @@ namespace BayesianHaiku
                         }
                     }
                 }
-                if (!exists)
+                if (!alreadyExistingWord)
                 {
+
                     Word newWord = new Word();
                     newWord.Name = corpus[i];
                     newWord.AppearanceCount = 1;
                     newWord.Sylables = 0;
+                    newWord.SubsequentWords = new Dictionary<string, int>();
 
-                    if (i != 0)
-                        newWord.PriorWords.Add(corpus[i - 1], 1);
-
-                    if (i != corpus.Count() - 1)
+                    if (i != corpus.Count() - 1 && corpus.Count() != 0)
                         newWord.SubsequentWords.Add(corpus[i + 1], 1);
+                    _words.Add(newWord);
 
                 }
+            }
+        }
+        public void SetSylables(Dictionary<string, int> wordAndSyllables)
+        {
+            //if(_words!=null)
+            foreach(Word w in _words)
+            {
+                if (wordAndSyllables.ContainsKey(w.Name))
+                    w.Sylables = wordAndSyllables[w.Name];
             }
         }
 

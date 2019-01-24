@@ -9,11 +9,11 @@ namespace BayesianHaiku
     class Menu
     {
         private BayesianNetwork _bn;
-        private FileReadWrite _fn;
+        private FileReadWrite _frw;
         
         public Menu()
         {
-            _fn = new FileReadWrite();
+            _frw = new FileReadWrite();
         }
         public void DisplayMenu()
         {
@@ -32,10 +32,19 @@ namespace BayesianHaiku
                 {
                     case "1":
                         _bn = new BayesianNetwork();
-                        _bn.Train(_fn.LoadTrainingData());
-                        SetSylablesCount();
+                        _bn.Train(_frw.LoadTrainingData());
+                        if (_bn.Words != null)
+                            SetSylablesCount();
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("\nERROR: No training Data Provided");
+                            Console.ReadKey();
+                        }
+                           
                         break;
                     case "2":
+                        
                         break;
                     case "q":
                         break;
@@ -44,28 +53,31 @@ namespace BayesianHaiku
                         break;
 
                 }
-                
+                Console.Clear();
             } while (displayMenu);
 
         }
 
         public void SetSylablesCount()
         {
+            _bn.SetSylables(_frw.LoadWordAndSyllables());
             int sylable;
             string uInput;
             foreach(Word w in _bn.Words)
             {
                 bool invalidInput = true;
-                if (w.Sylables == 0)
+                if (w.Sylables == 0 &&  !String.IsNullOrEmpty(w.Name))
                 {
                     do
                     {
+
                         Console.WriteLine("How many sylables does \"" + w.Name + "\" Contaion?");
                         uInput = Console.ReadLine();
                         if (int.TryParse(uInput, out sylable))
                         {
                             invalidInput = false;
                             w.Sylables = sylable;
+                            _frw.AddWordAndSyllable(w.Name, sylable);
                         }  
                     } while (invalidInput);
                 }
