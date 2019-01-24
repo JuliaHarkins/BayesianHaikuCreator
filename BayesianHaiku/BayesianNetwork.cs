@@ -10,7 +10,10 @@ namespace BayesianHaiku
     {
         private int _totalWords;
         private List<Word> _words;
+        private string _fileName;
+
         public List<Word> Words { get { return _words; } set { _words = value; } }
+        public string FileName { get { return _fileName; } set { _fileName = value; } }
 
         public BayesianNetwork()
         {
@@ -49,9 +52,6 @@ namespace BayesianHaiku
 
                     Word newWord = new Word();
                     newWord.Name = corpus[i];
-                    newWord.AppearanceCount = 1;
-                    newWord.Sylables = 0;
-                    newWord.SubsequentWords = new Dictionary<string, int>();
 
                     if (i != corpus.Count() - 1 && corpus.Count() != 0)
                         newWord.SubsequentWords.Add(corpus[i + 1], 1);

@@ -12,7 +12,8 @@ namespace BayesianHaiku
         private int _syllables;
         private int _apperanceCount;
         private Dictionary<string, int> _subsequentWords;
-    
+        
+
         /// <summary>
         /// The name of the word
         /// </summary>
@@ -35,7 +36,9 @@ namespace BayesianHaiku
         /// </summary>
         public Word()
         {
-
+            _apperanceCount = 1;
+            _syllables = 0;
+            _subsequentWords = new Dictionary<string, int>();
         }
     }
 }
