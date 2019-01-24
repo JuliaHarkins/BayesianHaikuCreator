@@ -9,9 +9,9 @@ namespace BayesianHaiku
 {
     class FileReadWrite
     {
-        private string _trainingFilePath = "TrainingFiles";
-        private string _trainedFilePath = "TrainedBayesianNetworks";
-        private string _wordAndSyllableKnowledgeFile = "WordAndSyllableKnowledge.txt";
+        private readonly string _trainingFilePath = "TrainingFiles";
+        private readonly string _trainedFilePath = "TrainedBayesianNetworks";
+        private readonly string _wordAndSyllableKnowledgeFile = "WordAndSyllableKnowledge.txt";
 
         public FileReadWrite()
         {
@@ -31,9 +31,30 @@ namespace BayesianHaiku
         }
         public void SaveNetworkKnowledge(BayesianNetwork bn)
         {
-            //TODO: make this save the file
-        }
+            //int num = 1;
+            //int fileLenght = _trainedFilePath.Count();
+            //while (File.Exists(_trainedFilePath + "/" + bn.FileName + ".txt"))
+            //{
+            //    if (num == 1)
+            //        bn.FileName = bn.FileName + num;
+            //    else
+            //    {
+            //        List<Char> fileNameChange = bn.FileName.ToCharArray().ToList();
 
+            //        for(int i = -1;  i <num.ToString().Count();i++)
+            //            fileNameChange[fileLenght + i] = (num++).ToString().ToCharArray()[i];
+            //        bn.FileName = fileNameChange.ToString();
+            //    }
+            //}
+            //File.Create(_trainedFilePath + "/" + bn.FileName + ".txt");
+            //foreach(Word w in bn.Words)
+            //{
+
+            //}
+        }
+            
+
+        // remove the .txt
         public BayesianNetwork LoadNetworkKnowledge()
         {
             BayesianNetwork bn = new BayesianNetwork();
