@@ -33,7 +33,7 @@ namespace BayesianHaiku
                     case "1":
                         _bn = new BayesianNetwork();
                         _bn.Train(_frw.LoadTrainingData());
-                        if (_bn.Words != null)
+                        if (_bn.Words != null || _bn.Words.Count==0)
                             SetSylablesCount();
                         else
                         {
@@ -41,10 +41,14 @@ namespace BayesianHaiku
                             Console.WriteLine("\nERROR: No training Data Provided");
                             Console.ReadKey();
                         }
+                        SaveNetwork();
                            
                         break;
                     case "2":
-                        
+                        break;
+                    case "3":
+                        //_frw.
+                        _bn = _frw.LoadExistingNetwork("TrainedBayesianNetworks\\Json_2.txt");
                         break;
                     case "q":
                         break;
@@ -57,8 +61,7 @@ namespace BayesianHaiku
             } while (displayMenu);
 
         }
-
-        public void SetSylablesCount()
+        private void SetSylablesCount()
         {
             _bn.SetSylables(_frw.LoadWordAndSyllables());
             int sylable;
@@ -66,7 +69,7 @@ namespace BayesianHaiku
             foreach(Word w in _bn.Words)
             {
                 bool invalidInput = true;
-                if (w.Sylables == 0 &&  !String.IsNullOrEmpty(w.Name))
+                if (w.Sylables == 0)
                 {
                     do
                     {
@@ -82,6 +85,59 @@ namespace BayesianHaiku
                     } while (invalidInput);
                 }
             }
+        }
+        private void SaveNetwork()
+        {
+            bool invalidFileName = true;
+            bool saveFile = true;
+            bool invalidInput = true;
+            string userInput;
+            do
+            {
+                Console.WriteLine("would you like to save the AI? y/n");
+                userInput = Console.ReadLine().ToLower();
+                switch (userInput)
+                {
+                    case "y":
+                        saveFile = true;
+                        invalidInput = false;
+                        break;
+                    case "n":
+                        saveFile = false;
+                        invalidInput = false;
+                        break;
+                        default:
+                        invalidInput = true;
+                        break;
+                }
+                if(saveFile == false)
+                {
+                    Console.WriteLine("Are you sure you don't want to save the AI? y/n");
+                    userInput = Console.ReadLine().ToLower();
+                    switch (userInput)
+                    {
+                        case "y":
+                            saveFile = true;
+                            invalidInput = false;
+                            break;
+                        case "n":
+                            saveFile = false;
+                            invalidInput = false;
+                            break;
+                        default:
+                            invalidInput = true;
+                            break;
+                    }
+                }
+            } while (invalidInput);
+
+
+            while (invalidFileName && saveFile)
+            {
+                Console.WriteLine("Please name the AI");
+                _bn.FileName = Console.ReadLine();
+                invalidFileName = _frw.SaveNetworkKnowledge(_bn);
+            } 
         }
     }
 }

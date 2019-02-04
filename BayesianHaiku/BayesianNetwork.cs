@@ -14,6 +14,7 @@ namespace BayesianHaiku
 
         public List<Word> Words { get { return _words; } set { _words = value; } }
         public string FileName { get { return _fileName; } set { _fileName = value; } }
+        public int TotalWords { get { return _totalWords; } set { _totalWords = value; } }
 
         public BayesianNetwork()
         {
@@ -28,35 +29,38 @@ namespace BayesianHaiku
         {
             bool alreadyExistingWord;
 
-            for(int i =0; i< corpus.Count(); i++) {
-                _totalWords++;
-                alreadyExistingWord = false;
-                if (_words != null)
-                foreach(Word w in _words)
-                {
-                    if(w.Name == corpus[i])
-                    {
-                        alreadyExistingWord = true;
-                        w.AppearanceCount++;
-                        if (i != corpus.Count() - 1)
+            for (int i = 0; i < corpus.Count(); i++) {
+                if (!String.IsNullOrEmpty(corpus[i])) {
+                    _totalWords++;
+                    alreadyExistingWord = false;
+                    if (_words != null)
+                        foreach (Word w in _words)
                         {
-                            if (!w.SubsequentWords.ContainsKey(corpus[i + 1]))
-                                w.SubsequentWords.Add(corpus[i + 1], 1);
-                            else
-                                w.SubsequentWords[corpus[i + 1]]++;
+
+                            if (w.Name == corpus[i])
+                            {
+                                alreadyExistingWord = true;
+                                w.AppearanceCount++;
+                                if (i != corpus.Count() - 1)
+                                {
+                                    if (!w.SubsequentWords.ContainsKey(corpus[i + 1]))
+                                        w.SubsequentWords.Add(corpus[i + 1], 1);
+                                    else
+                                        w.SubsequentWords[corpus[i + 1]]++;
+                                }
+                            }
                         }
+                    if (!alreadyExistingWord)
+                    {
+
+                        Word newWord = new Word();
+                        newWord.Name = corpus[i];
+
+                        if (i != corpus.Count() - 1 && corpus.Count() != 0)
+                            newWord.SubsequentWords.Add(corpus[i + 1], 1);
+                        _words.Add(newWord);
+
                     }
-                }
-                if (!alreadyExistingWord)
-                {
-
-                    Word newWord = new Word();
-                    newWord.Name = corpus[i];
-
-                    if (i != corpus.Count() - 1 && corpus.Count() != 0)
-                        newWord.SubsequentWords.Add(corpus[i + 1], 1);
-                    _words.Add(newWord);
-
                 }
             }
         }

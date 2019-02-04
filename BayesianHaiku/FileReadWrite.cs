@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+//using 
 using System.Threading.Tasks;
 
 namespace BayesianHaiku
 {
+    using Newtonsoft.Json;
+    using System.Diagnostics;
+
     class FileReadWrite
     {
         private readonly string _trainingFilePath = "TrainingFiles";
@@ -29,28 +33,70 @@ namespace BayesianHaiku
             }
 
         }
-        public void SaveNetworkKnowledge(BayesianNetwork bn)
+        public bool SaveNetworkKnowledge(BayesianNetwork bn)
         {
-            //int num = 1;
-            //int fileLenght = _trainedFilePath.Count();
-            //while (File.Exists(_trainedFilePath + "/" + bn.FileName + ".txt"))
-            //{
-            //    if (num == 1)
-            //        bn.FileName = bn.FileName + num;
-            //    else
-            //    {
-            //        List<Char> fileNameChange = bn.FileName.ToCharArray().ToList();
+            bool fileSaved = false;
+            string path = _trainedFilePath + "/" + bn.FileName + ".txt";
+            //string subWords;
 
-            //        for(int i = -1;  i <num.ToString().Count();i++)
-            //            fileNameChange[fileLenght + i] = (num++).ToString().ToCharArray()[i];
-            //        bn.FileName = fileNameChange.ToString();
-            //    }
-            //}
-            //File.Create(_trainedFilePath + "/" + bn.FileName + ".txt");
-            //foreach(Word w in bn.Words)
-            //{
+            try
+            {
+                if (!File.Exists(path))
 
+                {
+                    FileStream s = File.Create(path);
+                    
+                    s.Close();
+
+                    StreamWriter sw = File.AppendText(path);
+
+                    //sw.WriteLine(bn.TotalWords);
+                    string bnJsonString = JsonConvert.SerializeObject(bn);
+                    sw.WriteLine(bnJsonString);
+                    //foreach (Word w in bn.Words)
+                    //{
+                    //    sw.Write(w.Name + "," + w.Sylables + "," + w.AppearanceCount + ",");
+                    //    subWords = "";
+                    //    foreach (KeyValuePair<string, int> kvp in w.SubsequentWords)
+                    //    {
+                    //        subWords = subWords + kvp.Key + "+" + kvp.Value + ";";
+                    //    }
+                    //    sw.Write(subWords.Remove(subWords.Length - 1) + "=");
+                    //}
+                    sw.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error in saving the file. " + e);
+                
+            }
+            return fileSaved;
+        }
+        public BayesianNetwork LoadExistingNetwork(string path)
+        {
+            BayesianNetwork bn = new BayesianNetwork();
+            //StreamReader sr = new StreamReader(path);
+            string bnJsonString = File.ReadAllText(path);   //sr.ReadToEnd();
+            bn = JsonConvert.DeserializeObject<BayesianNetwork>(bnJsonString);
+
+            StringBuilder sb = new StringBuilder();
+            
+
+            //string bnJsonString = sr.ReadToEnd(path);
+            //string[] wordSplitNetwork = textNetwork.Split('=');
+            //bn.TotalWords = int.TryParse(wordSplitNetwork[0], out int totalwords) == true ? totalwords: 0;
+            //for (int i = 1; i < wordSplitNetwork.Count(); i++)
+            //{
+            //    string[] wordContentSplitNetwork = textNetwork.Split(',');
+            //    //foreach (string word = wordContentSplitNetwork);
+            //    //{
+            //     //   bn.
+            //    //}
             //}
+
+
+            return bn;
         }
             
 
@@ -91,30 +137,33 @@ namespace BayesianHaiku
 
             //the file contents
             string[] wordPlusSyllableFileContent = File.ReadAllLines(_wordAndSyllableKnowledgeFile);
-
+            string s ="";
+            string word= "";
             //grabs all the words and their syllables fromt the file
             for (int i = 1; i < wordPlusSyllableFileContent.Length; i++)
             {
                 try
                 {
                     string[] wordAndSyllableSplit = wordPlusSyllableFileContent[i].Split('+');
-                
-                    int syllables = int.Parse(wordAndSyllableSplit[1]);
-                    wordSyllablesDictonary.Add(wordAndSyllableSplit[0], syllables);
+                     s = wordAndSyllableSplit[1];
+                     word = wordAndSyllableSplit[0];
+                    int syllables = int.Parse(s);
+                    wordSyllablesDictonary.Add(word, syllables);
                 }
                 catch
                 {
-                    Console.WriteLine("File WordAndSyllableKnowledge.txt is formatted incorrectly.");
+                    Console.WriteLine("File WordAndSyllableKnowledge.txt is formatted incorrectly. at:"+ word+"+"+s);
                 }
             }
                 return wordSyllablesDictonary;
         }
         public void AddWordAndSyllable(string word,int syllable)
         {
-            using (StreamWriter sw = File.AppendText(_wordAndSyllableKnowledgeFile))
-            {
-                sw.WriteLine(word+"+"+syllable);
-            }
+            StreamWriter sw = new StreamWriter(_wordAndSyllableKnowledgeFile);
+
+            sw.WriteLine(word + "+" + syllable);
+            sw.Close();
+
         }
 
         /// <summary>
