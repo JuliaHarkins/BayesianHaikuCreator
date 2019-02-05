@@ -36,7 +36,6 @@ namespace BayesianHaiku
                     if (_words != null)
                         foreach (Word w in _words)
                         {
-
                             if (w.Name == corpus[i])
                             {
                                 alreadyExistingWord = true;
@@ -65,6 +64,72 @@ namespace BayesianHaiku
                     }
                 }
             }
+        }
+        public List<string[]> HaikuCreator()
+        {
+            Random rng = new Random();
+            string start = _words[rng.Next(_words.Count() - 1)].Name;
+            List<string[]> haiku = new List<string[]>();
+
+            string[] lineOne = BuildLine(5, start);
+            
+
+            haiku.Add(lineOne);
+            string[] lineTwo = BuildLine(7, lineOne[lineOne.Count()-1]);
+            haiku.Add(lineTwo);
+            string[] lineThree = BuildLine(5, lineTwo[lineTwo.Count() - 1]); 
+            haiku.Add(lineThree);
+
+            return haiku;
+        }
+        private string[] BuildLine(int sylablyesAllowed, string firstString)
+        {
+            Word word;
+            
+            List<string> line = new List<string>();
+            line.Add(firstString);
+            
+            word = _words.Find(w => w.Name == firstString);
+            int count = word.Sylables;
+            int remainingSylables;
+            int elements = 0;
+            Random rng = new Random();
+            do
+            {
+                if(count < sylablyesAllowed)
+                {
+                    remainingSylables = sylablyesAllowed - count;
+                    List<Word> posiblewords = new List<Word>();
+
+                    word = Words.Find(w => w.Name == line[elements]);
+                    Word wrd;
+                    foreach (KeyValuePair<string,int> kvp in word.SubsequentWords)
+                    {
+                         wrd = Words.Find(w => w.Name == kvp.Key);
+
+                        if (wrd.Sylables <= remainingSylables)
+                            posiblewords.Add(word);
+                    }
+
+                    if (posiblewords.Count == 0)
+                        count =+100;
+                    else
+                    {
+                        word = posiblewords[rng.Next(posiblewords.Count() - 1)];
+                        line.Add(word.Name);
+                        count = +word.Sylables;
+                        elements++;
+                    }
+                }
+                else
+                {
+                    word = Words.Find(w => w.Name == firstString);
+                    count =-word.Sylables;
+                    count =-100;
+                    line.RemoveAt(elements);
+                }                
+            } while (count != sylablyesAllowed);
+            return null;
         }
         /// <summary>
         /// updates the syllables of a word within the network

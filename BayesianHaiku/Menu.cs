@@ -78,6 +78,7 @@ namespace BayesianHaiku
 
                             //setting the network
                             _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum-1]);
+                            var haiku =_bn.HaikuCreator();
                         }
                         else
                         {
