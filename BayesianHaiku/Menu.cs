@@ -14,7 +14,9 @@ namespace BayesianHaiku
         public Menu()
         {
             _frw = new FileReadWrite();
+            _bn = new BayesianNetwork();
         }
+
         public void DisplayMenu()
         {
             bool displayMenu = true;
@@ -31,7 +33,6 @@ namespace BayesianHaiku
                 switch (uInput.ToLower())
                 {
                     case "1":
-                        _bn = new BayesianNetwork();
                         _bn.Train(_frw.LoadTrainingData());
                         if (_bn.Words != null || _bn.Words.Count==0)
                             SetSylablesCount();
@@ -42,18 +43,55 @@ namespace BayesianHaiku
                             Console.ReadKey();
                         }
                         SaveNetwork();
-                           
                         break;
+
                     case "2":
                         break;
+
                     case "3":
-                        //_frw.
-                        _bn = _frw.LoadExistingNetwork("TrainedBayesianNetworks\\Json_2.txt");
+                        Console.Clear();
+
+                        string[] availableNetworks =_frw.TrainedBayesianNetworkNames();
+                        int networkNum=-100;
+
+                        if (availableNetworks.Count() != 0)
+                        {
+
+                            //list the already saved networks
+                            Console.WriteLine("Select the Network you'd like to use");
+                            for (int i = 1; i <= availableNetworks.Count(); i++)
+                                Console.WriteLine(i + ".    " + availableNetworks[i - 1]);
+
+                            bool outOfBounds = true;
+                            //validate the userinput
+                            do
+                            {
+                                uInput = Console.ReadLine();
+                                int.TryParse(uInput, out networkNum);
+
+                                if ((networkNum > 0) && (networkNum <= availableNetworks.Count()))
+                                    outOfBounds = false;
+                                else
+                                    Console.WriteLine("invalid input");
+
+                            } while(outOfBounds);
+
+                            //setting the network
+                            _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum-1]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("ERROR: No trained networks available.");
+                            Console.ReadKey();
+                        }
                         break;
+
                     case "q":
+                        displayMenu = false;
                         break;
+
                     default:
-                        Console.WriteLine("Invalid option");
+                        Console.WriteLine("Invalid menu option");
                         break;
 
                 }

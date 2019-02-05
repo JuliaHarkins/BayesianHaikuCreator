@@ -30,3 +30,7 @@ D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\D
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.pdb
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.xml
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CopyComplete
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.dll
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.pdb
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.xml
+F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CopyComplete

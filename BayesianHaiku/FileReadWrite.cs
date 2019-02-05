@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-//using 
-using System.Threading.Tasks;
 
 namespace BayesianHaiku
 {
@@ -33,79 +31,70 @@ namespace BayesianHaiku
             }
 
         }
+        /// <summary>
+        /// saves the given network to a txt file
+        /// </summary>
+        /// <param name="bn">the network to be saved</param>
+        /// <returns></returns>
         public bool SaveNetworkKnowledge(BayesianNetwork bn)
         {
+            string path;
             bool fileSaved = false;
-            string path = _trainedFilePath + "/" + bn.FileName + ".txt";
-            //string subWords;
+
+            //checks if the file type is included
+            if (!bn.FileName.EndsWith(".txt"))
+                path = _trainedFilePath + "/" + bn.FileName + ".txt";
+            else
+                path = _trainedFilePath + "/" + bn.FileName;
 
             try
             {
                 if (!File.Exists(path))
 
                 {
+                    //converts the object to be placed into a file
+                    string bnJsonString = JsonConvert.SerializeObject(bn);
+
+                    //creates the file
                     FileStream s = File.Create(path);
-                    
                     s.Close();
 
+                    //saves the bayesian network to the file
                     StreamWriter sw = File.AppendText(path);
-
-                    //sw.WriteLine(bn.TotalWords);
-                    string bnJsonString = JsonConvert.SerializeObject(bn);
                     sw.WriteLine(bnJsonString);
-                    //foreach (Word w in bn.Words)
-                    //{
-                    //    sw.Write(w.Name + "," + w.Sylables + "," + w.AppearanceCount + ",");
-                    //    subWords = "";
-                    //    foreach (KeyValuePair<string, int> kvp in w.SubsequentWords)
-                    //    {
-                    //        subWords = subWords + kvp.Key + "+" + kvp.Value + ";";
-                    //    }
-                    //    sw.Write(subWords.Remove(subWords.Length - 1) + "=");
-                    //}
                     sw.Close();
+
+                    fileSaved = true;
                 }
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Error in saving the file. " + e);
-                
+                Debug.WriteLine("Error : " + e);
             }
             return fileSaved;
         }
+        /// <summary>
+        /// gets a network based on the given path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public BayesianNetwork LoadExistingNetwork(string path)
         {
             BayesianNetwork bn = new BayesianNetwork();
-            //StreamReader sr = new StreamReader(path);
-            string bnJsonString = File.ReadAllText(path);   //sr.ReadToEnd();
+
+            //gets the object in its text format from the file
+            string bnJsonString = File.ReadAllText(path);
+            //converts the text back to the object
             bn = JsonConvert.DeserializeObject<BayesianNetwork>(bnJsonString);
-
-            StringBuilder sb = new StringBuilder();
-            
-
-            //string bnJsonString = sr.ReadToEnd(path);
-            //string[] wordSplitNetwork = textNetwork.Split('=');
-            //bn.TotalWords = int.TryParse(wordSplitNetwork[0], out int totalwords) == true ? totalwords: 0;
-            //for (int i = 1; i < wordSplitNetwork.Count(); i++)
-            //{
-            //    string[] wordContentSplitNetwork = textNetwork.Split(',');
-            //    //foreach (string word = wordContentSplitNetwork);
-            //    //{
-            //     //   bn.
-            //    //}
-            //}
-
 
             return bn;
         }
-            
 
-        // remove the .txt
-        public BayesianNetwork LoadNetworkKnowledge()
+        public string[] TrainedBayesianNetworkNames()
         {
-            BayesianNetwork bn = new BayesianNetwork();
-            //TODO: make this load the file.
-            return bn;
+            string[] networkNames = Directory.GetFiles(_trainedFilePath, "*.txt");
+
+            return networkNames;
         }
         /// <summary>
         /// reads the information from the files in the training data
@@ -157,6 +146,7 @@ namespace BayesianHaiku
             }
                 return wordSyllablesDictonary;
         }
+
         public void AddWordAndSyllable(string word,int syllable)
         {
             StreamWriter sw = new StreamWriter(_wordAndSyllableKnowledgeFile);

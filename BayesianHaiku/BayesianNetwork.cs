@@ -22,7 +22,7 @@ namespace BayesianHaiku
             _words = new List<Word>();
         }
         /// <summary>
-        /// 
+        /// takes a list of words and turns them into something that makes sense to the network
         /// </summary>
         /// <param name="corpus">The words in the training data</param>
         public void Train(string[] corpus)
@@ -53,8 +53,10 @@ namespace BayesianHaiku
                     if (!alreadyExistingWord)
                     {
 
-                        Word newWord = new Word();
-                        newWord.Name = corpus[i];
+                        Word newWord = new Word
+                        {
+                            Name = corpus[i]
+                        };
 
                         if (i != corpus.Count() - 1 && corpus.Count() != 0)
                             newWord.SubsequentWords.Add(corpus[i + 1], 1);
@@ -64,9 +66,12 @@ namespace BayesianHaiku
                 }
             }
         }
+        /// <summary>
+        /// updates the syllables of a word within the network
+        /// </summary>
+        /// <param name="wordAndSyllables"></param>
         public void SetSylables(Dictionary<string, int> wordAndSyllables)
         {
-            //if(_words!=null)
             foreach(Word w in _words)
             {
                 if (wordAndSyllables.ContainsKey(w.Name))
