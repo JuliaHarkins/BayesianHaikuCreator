@@ -34,14 +34,14 @@ namespace BayesianHaiku
                 {
                     case "1":
                         _bn.Train(_frw.LoadTrainingData());
-                        if (_bn.Words != null || _bn.Words.Count==0)
-                            SetSylablesCount();
-                        else
-                        {
+                        //if (_bn.Words != null || _bn.Words.Count==0)
+                            //SetSylablesCount();
+                        //else
+                        //{
                             Console.Clear();
                             Console.WriteLine("\nERROR: No training Data Provided");
                             Console.ReadKey();
-                        }
+                        //}
                         SaveNetwork();
                         break;
 
@@ -78,7 +78,20 @@ namespace BayesianHaiku
 
                             //setting the network
                             _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum-1]);
-                            var haiku =_bn.HaikuCreator();
+                            List<string[]> haiku =_bn.HaikuCreator();
+
+                            Console.Clear();
+                            Console.WriteLine("Press any key to exit. You're haiku is:");
+                            foreach(string[] line in haiku)
+                            {
+                                Console.WriteLine();
+                                foreach(string word in line)
+                                {
+                                    Console.Write(word +" ");
+                                }
+                            }
+                            Console.ReadKey();
+                           
                         }
                         else
                         {
@@ -108,7 +121,7 @@ namespace BayesianHaiku
             foreach(Word w in _bn.Words)
             {
                 bool invalidInput = true;
-                if (w.Sylables == 0)
+                if (w.Syllables == 0)
                 {
                     do
                     {
@@ -118,7 +131,7 @@ namespace BayesianHaiku
                         if (int.TryParse(uInput, out sylable))
                         {
                             invalidInput = false;
-                            w.Sylables = sylable;
+                            w.Syllables = sylable;
                             _frw.AddWordAndSyllable(w.Name, sylable);
                         }  
                     } while (invalidInput);

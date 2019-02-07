@@ -19,7 +19,6 @@ E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\D
 E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CoreCompileInputs.cache
 E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.exe
 E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.pdb
-D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csprojAssemblyReference.cache
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CoreCompileInputs.cache
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.exe
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.pdb
@@ -29,8 +28,12 @@ D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\D
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.dll
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.pdb
 D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.xml
-D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CopyComplete
 F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.dll
 F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.pdb
 F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.xml
 F:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CopyComplete
+E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.dll
+E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.pdb
+E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\bin\Debug\Newtonsoft.Json.xml
+E:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csproj.CopyComplete
+D:\Subjects\3Year\Final Project\Project\BayesianHaikuCreator\BayesianHaiku\obj\Debug\BayesianHaiku.csprojResolveAssemblyReference.cache

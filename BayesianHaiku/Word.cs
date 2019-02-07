@@ -21,7 +21,7 @@ namespace BayesianHaiku
         /// <summary>
         /// The amount of sylables within the word
         /// </summary>
-        public int Sylables { get { return _syllables; } set { _syllables = value; } }
+        public int Syllables { get { return _syllables; } set { _syllables = value; } }
         /// <summary>
         /// the amount of times this word appeared in the training data
         /// </summary>
@@ -37,7 +37,6 @@ namespace BayesianHaiku
         public Word()
         {
             _apperanceCount = 1;
-            _syllables = 0;
             _subsequentWords = new Dictionary<string, int>();
         }
     }
