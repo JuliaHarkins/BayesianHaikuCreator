@@ -140,10 +140,11 @@ namespace BayesianHaiku
                 {
                     remainingSylables = sylablyesAllowed - count;
                     List<Word> posiblewords = new List<Word>();
-                    if(firstLine)
+                    if(firstLine && line.Count() >0)
                         word = Words.Find(w => w.Name == line[line.Count()-1]);
                     Word wrd;
-                    foreach (KeyValuePair<string,int> kvp in word.SubsequentWords)
+
+                    foreach (KeyValuePair<string, int> kvp in word.SubsequentWords.OrderByDescending(pair => pair.Value).Take(word.SubsequentWords.Count()/2))
                     {
                         if (!string.IsNullOrWhiteSpace(kvp.Key))
                         {
@@ -165,7 +166,7 @@ namespace BayesianHaiku
                 }
                 else
                 {
-                    if (line.Count > -1)
+                    if (line.Count > 0)
                     {
                         word = Words.Find(w => w.Name == firstString);
                         count -= word.Syllables;
@@ -173,7 +174,11 @@ namespace BayesianHaiku
                         line.RemoveAt(line.Count() - 1);
                     }
                     else
+                    {
                         word = _words[rng.Next(_words.Count() - 1)];
+                        count -= 100;
+                    }
+
                 }                
             } while (count != sylablyesAllowed);
             return line.ToArray();
