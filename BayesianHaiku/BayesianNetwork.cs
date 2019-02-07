@@ -140,7 +140,7 @@ namespace BayesianHaiku
                 {
                     remainingSylables = sylablyesAllowed - count;
                     List<Word> posiblewords = new List<Word>();
-                        if(firstLine)
+                    if(firstLine)
                         word = Words.Find(w => w.Name == line[line.Count()-1]);
                     Word wrd;
                     foreach (KeyValuePair<string,int> kvp in word.SubsequentWords)

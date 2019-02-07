@@ -34,14 +34,12 @@ namespace BayesianHaiku
                 {
                     case "1":
                         _bn.Train(_frw.LoadTrainingData());
-                        //if (_bn.Words != null || _bn.Words.Count==0)
-                            //SetSylablesCount();
-                        //else
-                        //{
+                        if (_bn.Words == null || _bn.Words.Count==0)
+                        {
                             Console.Clear();
                             Console.WriteLine("\nERROR: No training Data Provided");
                             Console.ReadKey();
-                        //}
+                        }
                         SaveNetwork();
                         break;
 
@@ -140,7 +138,7 @@ namespace BayesianHaiku
         }
         private void SaveNetwork()
         {
-            bool invalidFileName = true;
+            bool validFileName = false;
             bool saveFile = true;
             bool invalidInput = true;
             string userInput;
@@ -169,11 +167,11 @@ namespace BayesianHaiku
                     switch (userInput)
                     {
                         case "y":
-                            saveFile = true;
+                            saveFile = false;
                             invalidInput = false;
                             break;
                         case "n":
-                            saveFile = false;
+                            saveFile = true;
                             invalidInput = false;
                             break;
                         default:
@@ -184,11 +182,11 @@ namespace BayesianHaiku
             } while (invalidInput);
 
 
-            while (invalidFileName && saveFile)
+            while (!validFileName && saveFile)
             {
                 Console.WriteLine("Please name the AI");
                 _bn.FileName = Console.ReadLine();
-                invalidFileName = _frw.SaveNetworkKnowledge(_bn);
+                validFileName = _frw.SaveNetworkKnowledge(_bn);
             } 
         }
     }
