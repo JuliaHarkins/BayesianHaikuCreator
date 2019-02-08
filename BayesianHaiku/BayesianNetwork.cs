@@ -8,29 +8,53 @@ namespace BayesianHaiku
 {
     class BayesianNetwork
     {
+        /// <summary>
+        /// The total amount of words used within the AI
+        /// </summary>
         private int _totalWords;
+        /// <summary>
+        /// A list of the unique words used in the AI
+        /// </summary>
         private List<Word> _words;
+        /// <summary>
+        /// The name of the file in which the AI is contained
+        /// </summary>
         private string _fileName;
 
+        /// <summary>
+        /// The unique words in the AI
+        /// </summary>
         public List<Word> Words { get { return _words; } set { _words = value; } }
+        /// <summary>
+        /// The AI's file Name
+        /// </summary>
         public string FileName { get { return _fileName; } set { _fileName = value; } }
+        /// <summary>
+        /// The total Words within the AI
+        /// </summary>
         public int TotalWords { get { return _totalWords; } set { _totalWords = value; } }
 
+        /// <summary>
+        /// The constructor for the AI
+        /// </summary>
         public BayesianNetwork()
         {
             _totalWords = 0;
             _words = new List<Word>();
         }
         /// <summary>
-        /// takes a list of words and turns them into something that makes sense to the network
+        /// Takes a list of words and turns them into something that makes sense to the network
         /// </summary>
         /// <param name="corpus">The words in the training data</param>
         public void Train(string[] corpus)
         {
             bool alreadyExistingWord;
 
-            for (int i = 0; i < corpus.Count(); i++) {
-                if (!String.IsNullOrEmpty(corpus[i])) {
+            for (int i = 0; i < corpus.Count(); i++)
+            {
+                //makes sure the the string is not empty
+                if (!String.IsNullOrEmpty(corpus[i]))
+                {
                     _totalWords++;
                     alreadyExistingWord = false;
                     if (_words != null)
@@ -67,14 +91,14 @@ namespace BayesianHaiku
         }
         //https://codereview.stackexchange.com/questions/9972/syllable-counting-function stolen fuction
         /// <summary>
-        /// 
+        /// Counts the syllables in a word
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
         private int SyllableCount(string word)
         {
             word = word.ToLower().Trim();
-            bool lastWasVowel =false;
+            bool lastWasVowel = false;
             var vowels = new[] { 'a', 'e', 'i', 'o', 'u', 'y' };
             int count = 0;
 
@@ -100,8 +124,13 @@ namespace BayesianHaiku
 
             return count;
         }
-    
-        public List<string[]> HaikuCreator()
+
+
+        /// <summary>
+        /// Creates a haiku based off the known network knowledge
+        /// </summary>
+        /// <returns></returns>
+        public List<string[]> CreateHaiku()
         {
             Random rng = new Random();
             string start = _words[rng.Next(_words.Count() - 1)].Name;
@@ -118,33 +147,37 @@ namespace BayesianHaiku
 
             return haiku;
         }
-        private string[] BuildLine(int sylablyesAllowed, string firstString, bool firstLine)
+
+        /// <summary>
+        /// Builds the indevidual lines within the haiku
+        /// </summary>
+        private string[] BuildLine(int maxSyllables, string baseString, bool firstLine)
         {
             Word word;
             int count = 0;
             int remainingSylables;
             Random rng = new Random();
             List<string> line = new List<string>();
-            
-            word = _words.Find(w => w.Name == firstString);
+
+            word = _words.Find(w => w.Name == baseString);
 
             if (firstLine)
             {
-                line.Add(firstString);
+                line.Add(baseString);
                 count = word.Syllables;
             }
 
             do
             {
-                if(count < sylablyesAllowed)
+                if (count < maxSyllables)
                 {
-                    remainingSylables = sylablyesAllowed - count;
+                    remainingSylables = maxSyllables - count;
                     List<Word> posiblewords = new List<Word>();
-                    if(firstLine && line.Count() >0)
-                        word = Words.Find(w => w.Name == line[line.Count()-1]);
+                    if (firstLine && line.Count() > 0)
+                        word = Words.Find(w => w.Name == line[line.Count() - 1]);
                     Word wrd;
 
-                    foreach (KeyValuePair<string, int> kvp in word.SubsequentWords.OrderByDescending(pair => pair.Value).Take(word.SubsequentWords.Count()/2))
+                    foreach (KeyValuePair<string, int> kvp in word.SubsequentWords.OrderByDescending(pair => pair.Value).Take(word.SubsequentWords.Count() / 2))
                     {
                         if (!string.IsNullOrWhiteSpace(kvp.Key))
                         {
@@ -156,7 +189,7 @@ namespace BayesianHaiku
                     }
 
                     if (posiblewords.Count == 0)
-                        count +=100;
+                        count += 100;
                     else
                     {
                         word = posiblewords[rng.Next(posiblewords.Count() - 1)];
@@ -168,7 +201,7 @@ namespace BayesianHaiku
                 {
                     if (line.Count > 0)
                     {
-                        word = Words.Find(w => w.Name == firstString);
+                        word = Words.Find(w => w.Name == baseString);
                         count -= word.Syllables;
                         count -= 100;
                         line.RemoveAt(line.Count() - 1);
@@ -179,22 +212,9 @@ namespace BayesianHaiku
                         count -= 100;
                     }
 
-                }                
-            } while (count != sylablyesAllowed);
+                }
+            } while (count != maxSyllables);
             return line.ToArray();
         }
-        /// <summary>
-        /// updates the syllables of a word within the network
-        /// </summary>
-        /// <param name="wordAndSyllables"></param>
-        public void SetSylables(Dictionary<string, int> wordAndSyllables)
-        {
-            foreach(Word w in _words)
-            {
-                if (wordAndSyllables.ContainsKey(w.Name))
-                    w.Syllables = wordAndSyllables[w.Name];
-            }
-        }
-
     }
 }

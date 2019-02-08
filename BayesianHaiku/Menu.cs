@@ -8,15 +8,25 @@ namespace BayesianHaiku
 {
     class Menu
     {
+        /// <summary>
+        /// The AI that's currently in use
+        /// </summary>
         private BayesianNetwork _bn;
+        /// <summary>
+        /// The object used to save and retrieve information about the network
+        /// </summary>
         private FileReadWrite _frw;
-        
+        /// <summary>
+        /// Instanciates the member variables and allows
+        /// </summary>
         public Menu()
         {
             _frw = new FileReadWrite();
             _bn = new BayesianNetwork();
         }
-
+        /// <summary>
+        /// The main menu for the program
+        /// </summary>
         public void DisplayMenu()
         {
             bool displayMenu = true;
@@ -25,8 +35,7 @@ namespace BayesianHaiku
             {
                 Console.WriteLine("Please Select an Option or press q to quit");
                 Console.WriteLine("1.   Train Network");
-                Console.WriteLine("2.   Update Network");
-                Console.WriteLine("3.   Generate A haiku");
+                Console.WriteLine("2.   Generate A haiku");
                 Console.WriteLine("q.   quit");
                 uInput = Console.ReadLine();
 
@@ -42,11 +51,7 @@ namespace BayesianHaiku
                         }
                         SaveNetwork();
                         break;
-
                     case "2":
-                        break;
-
-                    case "3":
                         Console.Clear();
 
                         string[] availableNetworks =_frw.TrainedBayesianNetworkNames();
@@ -76,7 +81,7 @@ namespace BayesianHaiku
 
                             //setting the network
                             _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum-1]);
-                            List<string[]> haiku =_bn.HaikuCreator();
+                            List<string[]> haiku =_bn.CreateHaiku();
 
                             Console.Clear();
                             Console.WriteLine("Press any key to exit. You're haiku is:");
@@ -111,31 +116,10 @@ namespace BayesianHaiku
             } while (displayMenu);
 
         }
-        private void SetSylablesCount()
-        {
-            _bn.SetSylables(_frw.LoadWordAndSyllables());
-            int sylable;
-            string uInput;
-            foreach(Word w in _bn.Words)
-            {
-                bool invalidInput = true;
-                if (w.Syllables == 0)
-                {
-                    do
-                    {
-
-                        Console.WriteLine("How many sylables does \"" + w.Name + "\" Contaion?");
-                        uInput = Console.ReadLine();
-                        if (int.TryParse(uInput, out sylable))
-                        {
-                            invalidInput = false;
-                            w.Syllables = sylable;
-                            _frw.AddWordAndSyllable(w.Name, sylable);
-                        }  
-                    } while (invalidInput);
-                }
-            }
-        }
+        /// <summary>
+        /// Asks the user for a valid file name and
+        /// saves the file if it's not already in existance
+        /// </summary>
         private void SaveNetwork()
         {
             bool validFileName = false;

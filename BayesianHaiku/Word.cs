@@ -8,11 +8,23 @@ namespace BayesianHaiku
 {
     class Word
     {
+        /// <summary>
+        /// the name of the word
+        /// </summary>
         private string _name;
+        /// <summary>
+        /// the amount of syllables within the word
+        /// </summary>
         private int _syllables;
+        /// <summary>
+        /// how often the word appears
+        /// </summary>
         private int _apperanceCount;
+        /// <summary>
+        /// all the words that follow and their frequancy
+        /// </summary>
         private Dictionary<string, int> _subsequentWords;
-        
+
 
         /// <summary>
         /// The name of the word

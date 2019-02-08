@@ -11,10 +11,18 @@ namespace BayesianHaiku
 
     class FileReadWrite
     {
+        /// <summary>
+        /// The Path that contains all the trainign data
+        /// </summary>
         private readonly string _trainingFilePath = "TrainingFiles";
+        /// <summary>
+        /// The path in which the AI is saved
+        /// </summary>
         private readonly string _trainedFilePath = "TrainedBayesianNetworks";
-        private readonly string _wordAndSyllableKnowledgeFile = "WordAndSyllableKnowledge.txt";
 
+        /// <summary>
+        /// Constructor for the class
+        /// </summary>
         public FileReadWrite()
         {
             if (!Directory.Exists(_trainingFilePath))
@@ -24,10 +32,6 @@ namespace BayesianHaiku
             if (!Directory.Exists(_trainedFilePath))
             {
                 Directory.CreateDirectory(_trainedFilePath);
-            }
-            if (!File.Exists(_wordAndSyllableKnowledgeFile))
-            {
-                File.Create(_wordAndSyllableKnowledgeFile);
             }
 
         }
@@ -74,7 +78,7 @@ namespace BayesianHaiku
             return fileSaved;
         }
         /// <summary>
-        /// gets a network based on the given path
+        /// Gets a network based on the given path
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
@@ -90,6 +94,9 @@ namespace BayesianHaiku
             return bn;
         }
 
+        /// <summary>
+        /// Gets the names of all the saved AI files
+        /// </summary>
         public string[] TrainedBayesianNetworkNames()
         {
             string[] networkNames = Directory.GetFiles(_trainedFilePath, "*.txt");
@@ -97,12 +104,12 @@ namespace BayesianHaiku
             return networkNames;
         }
         /// <summary>
-        /// reads the information from the files in the training data
+        /// Reads the information from the files in the training data
         /// folder, then removes the punctuation from it and splits it
         /// into indevidual words.
         /// </summary>
         /// <returns>the words from the body of text</returns>
-        public string[]  LoadTrainingData()
+        public string[] LoadTrainingData()
         {
             List<string> words = new List<string>();
             foreach (string file in Directory.EnumerateFiles(_trainingFilePath, "*.txt"))
@@ -118,42 +125,6 @@ namespace BayesianHaiku
             }
 
             return words.ToArray(); ;
-        }
-        public Dictionary<string, int> LoadWordAndSyllables()
-        {
-            //the Dictionary of all known words and their syllables 
-            Dictionary<string, int> wordSyllablesDictonary = new Dictionary<string, int>();
-
-            //the file contents
-            string[] wordPlusSyllableFileContent = File.ReadAllLines(_wordAndSyllableKnowledgeFile);
-            string s ="";
-            string word= "";
-            //grabs all the words and their syllables fromt the file
-            for (int i = 1; i < wordPlusSyllableFileContent.Length; i++)
-            {
-                try
-                {
-                    string[] wordAndSyllableSplit = wordPlusSyllableFileContent[i].Split('+');
-                     s = wordAndSyllableSplit[1];
-                     word = wordAndSyllableSplit[0];
-                    int syllables = int.Parse(s);
-                    wordSyllablesDictonary.Add(word, syllables);
-                }
-                catch
-                {
-                    Console.WriteLine("File WordAndSyllableKnowledge.txt is formatted incorrectly. at:"+ word+"+"+s);
-                }
-            }
-                return wordSyllablesDictonary;
-        }
-
-        public void AddWordAndSyllable(string word,int syllable)
-        {
-            StreamWriter sw = new StreamWriter(_wordAndSyllableKnowledgeFile);
-
-            sw.WriteLine(word + "+" + syllable);
-            sw.Close();
-
         }
 
         /// <summary>

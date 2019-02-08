@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BayesianHaiku.Menu">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAEAAAYAAAAAA=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianHaiku.Program">
+    <Position X="6.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianHaiku.Word">
+    <Position X="3.5" Y="1" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAgAAAAAAAAAIAAgCAQAAAAAAgAAAAAAAAAABAA=</HashCode>
+      <FileName>Word.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianHaiku.FileReadWrite">
+    <Position X="11.5" Y="2" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAACAAAAAAAQAgAAAQAAAAAAAAAAAAAAAAAACAE=</HashCode>
+      <FileName>FileReadWrite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BayesianHaiku.BayesianNetwork">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACkEAAAAAAAAAUAAAAAAAAAAAAAAAAAAABAAABgAAI=</HashCode>
+      <FileName>BayesianNetwork.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

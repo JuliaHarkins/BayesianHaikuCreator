@@ -8,6 +8,9 @@ namespace BayesianHaiku
 {
     class Program
     {
+        /// <summary>
+        /// the main access point to the program
+        /// </summary>
         static void Main(string[] args)
         {
             Menu m = new Menu();
