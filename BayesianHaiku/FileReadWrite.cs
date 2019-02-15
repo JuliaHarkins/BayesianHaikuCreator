@@ -20,6 +20,7 @@ namespace BayesianHaiku
         /// </summary>
         private readonly string _trainedFilePath = "TrainedBayesianNetworks";
 
+        private readonly string _syllableCount = "WordAndSyllableKnowledge";
         /// <summary>
         /// Constructor for the class
         /// </summary>
@@ -32,6 +33,10 @@ namespace BayesianHaiku
             if (!Directory.Exists(_trainedFilePath))
             {
                 Directory.CreateDirectory(_trainedFilePath);
+            }
+            if (!File.Exists(_syllableCount))
+            {
+                File.Create(_syllableCount);
             }
 
         }

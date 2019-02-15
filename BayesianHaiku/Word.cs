@@ -24,7 +24,10 @@ namespace BayesianHaiku
         /// all the words that follow and their frequancy
         /// </summary>
         private Dictionary<string, int> _subsequentWords;
-
+        /// <summary>
+        /// The words that came before
+        /// </summary>
+        private List<string[]> _previousWords;
 
         /// <summary>
         /// The name of the word
@@ -39,6 +42,10 @@ namespace BayesianHaiku
         /// </summary>
         public int AppearanceCount { get { return _apperanceCount; } set { _apperanceCount = value; } }
         /// <summary>
+        /// The words that came before
+        /// </summary>
+        public List<string[]> PreviousWords { get { return _previousWords; } set { _previousWords = value; } }
+        /// <summary>
         /// A list of words that normally appear after this word
         /// </summary>
         public Dictionary<string, int> SubsequentWords { get { return _subsequentWords; } set { _subsequentWords = value; } }
@@ -49,6 +56,7 @@ namespace BayesianHaiku
         public Word()
         {
             _apperanceCount = 1;
+            _previousWords = new List<string[]>();
             _subsequentWords = new Dictionary<string, int>();
         }
     }
