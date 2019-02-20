@@ -78,21 +78,28 @@ namespace BayesianHaiku
                                     Console.WriteLine("invalid input");
 
                             } while(outOfBounds);
-
-                            //setting the network
-                            _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum-1]);
-                            List<string[]> haiku =_bn.CreateHaiku();
-
                             Console.Clear();
                             Console.WriteLine("Press any key to exit. You're haiku is:");
-                            foreach(string[] line in haiku)
+                            //TEMP
+                            for (int i = 0; i < 30; i++)
                             {
+
+                                //setting the network
+                                _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum - 1]);
+                                List<string[]> haiku = _bn.CreateHaiku();
+
+
                                 Console.WriteLine();
-                                foreach(string word in line)
+                                foreach (string[] line in haiku)
                                 {
-                                    Console.Write(word +" ");
+                                    Console.WriteLine();
+                                    foreach (string word in line)
+                                    {
+                                        Console.Write(word + " ");
+                                    }
                                 }
                             }
+                            //TEMP
                             Console.ReadKey();
                            
                         }
