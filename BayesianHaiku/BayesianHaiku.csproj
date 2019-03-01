@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BayesianNetwork.cs" />
+    <Compile Include="Bayesian.cs" />
     <Compile Include="FileReadWrite.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Program.cs" />

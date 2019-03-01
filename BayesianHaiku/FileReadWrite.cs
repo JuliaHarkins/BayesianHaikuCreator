@@ -20,7 +20,6 @@ namespace BayesianHaiku
         /// </summary>
         private readonly string _trainedFilePath = "TrainedBayesianNetworks";
 
-        private readonly string _syllableCount = "WordAndSyllableKnowledge";
         /// <summary>
         /// Constructor for the class
         /// </summary>
@@ -34,10 +33,6 @@ namespace BayesianHaiku
             {
                 Directory.CreateDirectory(_trainedFilePath);
             }
-            if (!File.Exists(_syllableCount))
-            {
-                File.Create(_syllableCount);
-            }
 
         }
         /// <summary>
@@ -45,7 +40,7 @@ namespace BayesianHaiku
         /// </summary>
         /// <param name="bn">the network to be saved</param>
         /// <returns></returns>
-        public bool SaveNetworkKnowledge(BayesianNetwork bn)
+        public bool SaveNetworkKnowledge(Bayesian bn)
         {
             string path;
             bool fileSaved = false;
@@ -87,14 +82,14 @@ namespace BayesianHaiku
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public BayesianNetwork LoadExistingNetwork(string path)
+        public Bayesian LoadExistingNetwork(string path)
         {
-            BayesianNetwork bn = new BayesianNetwork();
+            Bayesian bn = new Bayesian();
 
             //gets the object in its text format from the file
             string bnJsonString = File.ReadAllText(path);
             //converts the text back to the object
-            bn = JsonConvert.DeserializeObject<BayesianNetwork>(bnJsonString);
+            bn = JsonConvert.DeserializeObject<Bayesian>(bnJsonString);
 
             return bn;
         }

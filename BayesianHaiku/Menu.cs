@@ -11,7 +11,7 @@ namespace BayesianHaiku
         /// <summary>
         /// The AI that's currently in use
         /// </summary>
-        private BayesianNetwork _bn;
+        private Bayesian _bn;
         /// <summary>
         /// The object used to save and retrieve information about the network
         /// </summary>
@@ -22,7 +22,7 @@ namespace BayesianHaiku
         public Menu()
         {
             _frw = new FileReadWrite();
-            _bn = new BayesianNetwork();
+            _bn = new Bayesian();
         }
         /// <summary>
         /// The main menu for the program
@@ -34,7 +34,7 @@ namespace BayesianHaiku
             do
             {
                 Console.WriteLine("Please Select an Option or press q to quit");
-                Console.WriteLine("1.   Train Network");
+                Console.WriteLine("1.   Train");
                 Console.WriteLine("2.   Generate A haiku");
                 Console.WriteLine("q.   quit");
                 uInput = Console.ReadLine();
@@ -81,8 +81,8 @@ namespace BayesianHaiku
                             Console.Clear();
                             Console.WriteLine("Press any key to exit. You're haiku is:");
                             //TEMP
-                            for (int i = 0; i < 30; i++)
-                            {
+                            //for (int i = 0; i < 30; i++)
+                            //{
 
                                 //setting the network
                                 _bn = _frw.LoadExistingNetwork(availableNetworks[networkNum - 1]);
@@ -98,7 +98,7 @@ namespace BayesianHaiku
                                         Console.Write(word + " ");
                                     }
                                 }
-                            }
+                            //}
                             //TEMP
                             Console.ReadKey();
                            
