@@ -123,11 +123,11 @@ namespace BayesianHaiku
         {
             word = word.ToLower().Trim();
             bool lastWasVowel = false;
-            var vowels = new[] { 'a', 'e', 'i', 'o', 'u', 'y' };
+            Char[] vowels = new[] { 'a', 'e', 'i', 'o', 'u', 'y' };
             int count = 0;
 
             //a string is an IEnumerable<char>; convenient.
-            foreach (var c in word)
+            foreach (Char c in word)
             {
                 if (vowels.Contains(c))
                 {
@@ -302,7 +302,7 @@ namespace BayesianHaiku
                     else
                     {
                         word = _words[rng.Next(_words.Count() - 1)];
-                        count -= 100;
+                        count = word.Syllables;
                     }
 
                 }
